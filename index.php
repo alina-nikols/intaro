@@ -1,8 +1,8 @@
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
-<b>АВТОРИЗАЦИЯ</b>
+<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+<b>РђРІС‚РѕСЂРёР·Р°С†РёСЏ</b>
 <form action="test.php" method="post">
-<p>Логин: <input type="text" name="login" /></p>
-<p>Пароль: <input type="password" name="password" /></p>
-<input type="submit" value="Войти" name="log_in" />
-<p>Еще не зарегистрированы? <a href='reg.php'>Регистрация</a></p>
+<p>Р›РѕРіРёРЅ: <input type="text" name="login" /></p>
+<p>РџР°СЂРѕР»СЊ: <input type="password" name="password" /></p>
+<input type="submit" value="Р’РѕР№С‚Рё" name="log_in" />
+<p>Р•С‰Рµ РЅРµ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅС‹? <a href='reg.php'>Р РµРіРёСЃС‚СЂР°С†РёСЏ</a></p>
 </form>
