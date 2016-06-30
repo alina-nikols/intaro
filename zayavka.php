@@ -1,9 +1,9 @@
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
-<b>ДОБАВЛЕНИЕ ЗАЯВКИ</b>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-utf8" />
+<b>Р”РћР‘РђР’Р›Р•РќРР• Р—РђРЇР’РљР</b>
 <form action="save2.php" method="post">
-<p>Название заявки*: <input type="text" name="name" /></p>
-<p>Номер телефона*: <input type="char" name="phone" /></p>
-<p>Описание проблемы*: <input type="text" name="problem" input required="" pattern="{10,500}" />
+<p>РќР°Р·РІР°РЅРёРµ Р·Р°СЏРІРєРё*: <input type="text" name="name" /></p>
+<p>РќРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°*: <input type="char" name="phone" /></p>
+<p>РћРїРёСЃР°РЅРёРµ РїСЂРѕР±Р»РµРјС‹*: <input type="text" name="problem" input required="" pattern="{10,500}" />
 <p>
-  <input type="submit" value="Добавить заявку" name="log_in" />
+  <input type="submit" value="Р”РѕР±Р°РІРёС‚СЊ Р·Р°СЏРІРєСѓ" name="log_in" />
 </p>
