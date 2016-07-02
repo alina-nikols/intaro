@@ -1,4 +1,5 @@
-<?php session_start();
+<?php
+include ("connect.php");
 if (isset($_POST['login']))
 {
 	$login = $_POST['login'];
@@ -17,22 +18,19 @@ if (isset($_POST['password']))
 }
 if (empty($login) or empty($password))
     {
-    exit ("Вы ввели не всю информацию, вернитесь назад и заполните все поля!");
+    exit ("Р’С‹ РІРІРµР»Рё РЅРµ РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ, РІРµСЂРЅРёС‚РµСЃСЊ РЅР°Р·Р°Рґ Рё Р·Р°РїРѕР»РЅРёС‚Рµ РІСЃРµ РїРѕР»СЏ!");
     }
+	else
+	{
     $login = stripslashes($login);
-    $login = htmlspecialchars($login);
 	$password = stripslashes($password);
-    $password = htmlspecialchars($password);
     $login = trim($login);
     $password = trim($password);
-    $connect = mysql_connect ("localhost","root","");
-	mysql_select_db("pr",$connect);
-	mysql_set_charset("cp1251");
 	$result = mysql_query("SELECT * FROM users WHERE login='$login'",$connect);
     $myrow = mysql_fetch_array($result);
     if (empty($myrow['password']))
     {
-		echo "Извините, введённый вами login или пароль неверный.";
+		echo "РР·РІРёРЅРёС‚Рµ, РІРІРµРґС‘РЅРЅС‹Р№ РІР°РјРё login РёР»Рё РїР°СЂРѕР»СЊ РЅРµРІРµСЂРЅС‹Р№.";
     }
     else
 	{
@@ -42,14 +40,15 @@ if (empty($login) or empty($password))
 			$_SESSION['id']=$myrow['id'];
 			$_SESSION['private']=$myrow['private'];
 			$_SESSION['logged'] = 1;
-			echo "Вы успешно вошли на сайт ";
-			if ($login == "admin") echo "как админ:) ";
-			echo "<a href='home.php'>Главная страница</a>";
+			echo "Р’С‹ СѓСЃРїРµС€РЅРѕ РІРѕС€Р»Рё РЅР° СЃР°Р№С‚ ";
+			if ($login == "admin") echo "РєР°Рє Р°РґРјРёРЅ:) ";
+			echo "<a href='home.php'>Р“Р»Р°РІРЅР°СЏ СЃС‚СЂР°РЅРёС†Р°</a>";
 		}
 		else
 		{
-			echo "Извините, введённый вами login или пароль неверный.";
+			echo "РР·РІРёРЅРёС‚Рµ, РІРІРµРґС‘РЅРЅС‹Р№ РІР°РјРё login РёР»Рё РїР°СЂРѕР»СЊ РЅРµРІРµСЂРЅС‹Р№.";
 		}
     }
+	}
 ?>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
