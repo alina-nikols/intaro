@@ -1,14 +1,14 @@
 <?php
-session_start();
+include ("connect.php");
 if(empty($_SESSION['login']))
 {
-	echo "Доступ на эту страницу разрешен только зарегистрированным пользователям. Если вы зарегистрированы, то войдите на сайт под своим логином и паролем <br><a href='index.php'>Авторизоваться</a>";
+	echo "Р”РѕСЃС‚СѓРї РЅР° СЌС‚Сѓ СЃС‚СЂР°РЅРёС†Сѓ СЂР°Р·СЂРµС€РµРЅ С‚РѕР»СЊРєРѕ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅРЅС‹Рј РїРѕР»СЊР·РѕРІР°С‚РµР»СЏРј. Р•СЃР»Рё РІС‹ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅС‹, С‚Рѕ РІРѕР№РґРёС‚Рµ РЅР° СЃР°Р№С‚ РїРѕРґ СЃРІРѕРёРј Р»РѕРіРёРЅРѕРј Рё РїР°СЂРѕР»РµРј <br><a href='index.php'>РђРІС‚РѕСЂРёР·РѕРІР°С‚СЊСЃСЏ</a>";
 }
 else
 {
-echo "<b>ПРОСМОТР ЗАЯВКИ</b><br>";
+echo "<b>РџР РћРЎРњРћРўР  Р—РђРЇР’РљР</b><br>";
 $color = "coral red";
-echo "Вы вошли на сайт, как <font color=$color>" .$_SESSION['login']."</font> <a href='exit.php'>Выйти</a>";
+echo "Р’С‹ РІРѕС€Р»Рё РЅР° СЃР°Р№С‚, РєР°Рє <font color=$color>" .$_SESSION['login']."</font> <a href='exit.php'>Р’С‹Р№С‚Рё</a>";
 echo "<br><br>";
 if (isset($_POST['name']))
 {
@@ -18,9 +18,6 @@ if (isset($_POST['name']))
 		unset($name);
 	}
 }
-$connect = mysql_connect ("localhost","root","");
-mysql_select_db("pr",$connect);
-mysql_set_charset("cp1251");
 $name = $_POST['name'];
 $login = $_SESSION['login'];
 
@@ -30,12 +27,12 @@ if (!empty($myrow['name']))
 {
 	$result = mysql_query("SELECT name, phone, problem FROM zayavka WHERE name = '$name'",$connect);
 	while ($vvv = mysql_fetch_array($result))
-	echo "Название заявки: ".$vvv['name']."<br>Номер телефона: ".$vvv['phone']."<br>Описание проблемы: ".$vvv['problem']."<br>";
+	echo "РќР°Р·РІР°РЅРёРµ Р·Р°СЏРІРєРё: ".$vvv['name']."<br>РќРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°: ".$vvv['phone']."<br>РћРїРёСЃР°РЅРёРµ РїСЂРѕР±Р»РµРјС‹: ".$vvv['problem']."<br>";
 }
 else
 {
-	echo "Ошибка! Заявка не найдена.";
+	echo "РћС€РёР±РєР°! Р—Р°СЏРІРєР° РЅРµ РЅР°Р№РґРµРЅР°.";
 }
 }
 ?>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
