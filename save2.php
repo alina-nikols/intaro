@@ -1,5 +1,5 @@
 <?php
-session_start();
+include ("connect.php");
 if (isset($_POST['login']))
 {
 	$login = $_POST['login'];
@@ -35,23 +35,20 @@ if (isset($_POST['login']))
 	$login = $_SESSION['login'];
     if (empty($name) or empty($phone) or empty($problem))
     {
-    echo "Âû ââåëè íå âñþ èíôîðìàöèþ, âåðíèòåñü íàçàä è çàïîëíèòå âñå ïîëÿ!";
+    echo "Ð’Ñ‹ Ð²Ð²ÐµÐ»Ð¸ Ð½Ðµ Ð²ÑÑŽ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸ÑŽ, Ð²ÐµÑ€Ð½Ð¸Ñ‚ÐµÑÑŒ Ð½Ð°Ð·Ð°Ð´ Ð¸ Ð·Ð°Ð¿Ð¾Ð»Ð½Ð¸Ñ‚Ðµ Ð²ÑÐµ Ð¿Ð¾Ð»Ñ!";
     }
+	else
+	{
     $login = stripslashes($login);
-    $login = htmlspecialchars($login);
     $name = stripslashes($name);
-    $name = htmlspecialchars($name);
     $phone = stripslashes($phone);
-    $phone = htmlspecialchars($phone);
     $problem = stripslashes($problem);
     $problem = htmlspecialchars($problem);
     $login = trim($login);
     $name = trim($name);
     $phone = trim($phone);
     $problem = trim($problem);
-	$connect = mysql_connect ("localhost","root","");
-    mysql_select_db("pr",$connect);
-	mysql_set_charset("cp1251");
+	
     $result3 = mysql_query ("INSERT INTO zayavka (login,name,phone,problem) VALUES ('$login','$name','$phone','$problem')");
     if ($result3=='TRUE')
     {
@@ -59,7 +56,8 @@ if (isset($_POST['login']))
     }
  else 
     {
-    echo "Îøèáêà! Çàÿâêà íå äîáàâëåíà.";
+    echo "ÐžÑˆÐ¸Ð±ÐºÐ°! Ð—Ð°ÑÐ²ÐºÐ° Ð½Ðµ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð°.";
     }
+	}
 ?>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
