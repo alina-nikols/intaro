@@ -1,49 +1,63 @@
 <?php
-session_start();
+include ("connect.php");
 if(empty($_SESSION['login']))
 {
-	echo "Доступ на эту страницу разрешен только зарегистрированным пользователям. Если вы зарегистрированы, то войдите на сайт под своим логином и паролем <br><a href='index.php'>Авторизоваться</a>";
+	echo "Р”РѕСЃС‚СѓРї РЅР° СЌС‚Сѓ СЃС‚СЂР°РЅРёС†Сѓ СЂР°Р·СЂРµС€РµРЅ С‚РѕР»СЊРєРѕ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅРЅС‹Рј РїРѕР»СЊР·РѕРІР°С‚РµР»СЏРј. Р•СЃР»Рё РІС‹ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅС‹, С‚Рѕ РІРѕР№РґРёС‚Рµ РЅР° СЃР°Р№С‚ РїРѕРґ СЃРІРѕРёРј Р»РѕРіРёРЅРѕРј Рё РїР°СЂРѕР»РµРј <br><a href='index.php'>РђРІС‚РѕСЂРёР·РѕРІР°С‚СЊСЃСЏ</a>";
 }
 else
 {
-echo "<b>СПИСОК ЗАЯВОК</b><br>";
+echo "<b>РЎРџРРЎРћРљ Р—РђРЇР’РћРљ</b><br>";
 $color = "coral red";
-echo "Вы вошли на сайт, как <font color=$color>" .$_SESSION['login']."</font> <a href='exit.php'>Выйти</a>";
+echo "Р’С‹ РІРѕС€Р»Рё РЅР° СЃР°Р№С‚, РєР°Рє <font color=$color>" .$_SESSION['login']."</font> <a href='exit.php'>Р’С‹Р№С‚Рё</a>";
 echo "<br><br>";
-$connect = mysql_connect ("localhost","root","");
-mysql_select_db("pr",$connect);
-mysql_set_charset("cp1251");
 $login = $_SESSION['login'];
 
-$res = mysql_query("SELECT name, phone, problem FROM zayavka WHERE login = '$login' ORDER BY id DESC LIMIT 1",$connect);
-$result = mysql_query("SELECT name, phone, problem FROM zayavka WHERE login = '$login' ORDER BY id DESC LIMIT 1,1000000",$connect);
-
-$v = mysql_fetch_assoc($res);
-$color = "red";
-echo "<font color=$color>".$v['name']."</font><br>-------------------------------------------------------<br>";
-
-while($vv = mysql_fetch_assoc($result))
+function display_db_table($zayavka, $connect)
 {
-	echo "".$vv['name']."<br>-------------------------------------------------------<br>";
-}
+	$query_string = "SELECT name,phone,problem FROM zayavka";
+	$res_id = mysql_query($query_string, $connect);
+	$column_count = mysql_num_fields($res_id);
+	print ("<TABLE BORDER=1>\n");
+	while ($row = mysql_fetch_row($res_id))
+	{
+	
+		for ($column_num=0; $column_num<$column_count; $column_num++)
+			print ("<TD>$row[$column_num]</TD\n");
+		print("</TD>\n");
+	}
+	print ("<TABLE>\n");
+	}
 
 if($login == "admin")
 {
-	$res = mysql_query("SELECT * FROM zayavka ORDER BY id DESC LIMIT 1",$connect);
-	$v = mysql_fetch_assoc($res);
-	$color = "red";
-	echo "<font color=$color> Логин: ".$v['login']."<br>Заявка: ".$v['name']."</font><br>-------------------------------------------------------<br>";
-
-	$result = mysql_query("SELECT * FROM zayavka ORDER BY id DESC LIMIT 1,1000000",$connect);
-	while($vv = mysql_fetch_assoc($result))
+	function display_db_table($zayavka, $connect)
+{
+	$query_string = "SELECT * FROM zayavka";
+	$res_id = mysql_query($query_string, $connect);
+	$column_count = mysql_num_fields($res_id);
+	print ("<TABLE BORDER=1>\n");
+	while ($row = mysql_fetch_row($res_id))
 	{
-		echo "Логин: ".$vv['login']."<br>Заявка: ".$vv['name']."<br>-------------------------------------------------------<br>";
+	
+		for ($column_num=0; $column_num<$column_count; $column_num++)
+			print ("<TD>$row[$column_num]</TD\n");
+		print("</TD>\n");
+	}
+	print ("<TABLE>\n");
 	}
 }
 }
 ?>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
-<b><br>Просмотр данных о заявке</b>
+
+<HTML>
+<BODY>
+<TABLE><TR><TD>
+<?php display_db_table("", $connect)?>
+</TD></TR></TABLE></BODY></HTML>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<b><br>РџСЂРѕСЃРјРѕС‚СЂ РґР°РЅРЅС‹С… Рѕ Р·Р°СЏРІРєРµ</b>
 <form action="prosmotr.php" method="post">
-<p>Название заявки: <input type="text" name="name" /></p>
-<input type="submit" value="Просмотреть данные" name="log_in" />
+<p>РќР°Р·РІР°РЅРёРµ Р·Р°СЏРІРєРё: <input type="text" name="name" /></p>
+<input type="submit" value="РџСЂРѕСЃРјРѕС‚СЂРµС‚СЊ РґР°РЅРЅС‹Рµ" name="log_in" />
