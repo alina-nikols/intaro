@@ -1,4 +1,5 @@
 <?php
+include ("connect.php");
 if (isset($_POST['login'])) 
 { 
 $login = $_POST['login'];
@@ -17,31 +18,30 @@ if (isset($_POST['password']))
 }
 if (empty($login) or empty($password))
 {
-	echo "Вы ввели не всю информацию, вернитесь назад и заполните все поля!";
+	echo "Р’С‹ РІРІРµР»Рё РЅРµ РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ, РІРµСЂРЅРёС‚РµСЃСЊ РЅР°Р·Р°Рґ Рё Р·Р°РїРѕР»РЅРёС‚Рµ РІСЃРµ РїРѕР»СЏ!";
 	}
+	else
+	{
 	$login = stripslashes($login);
-    $login = htmlspecialchars($login);
     $password = stripslashes($password);
-    $password = htmlspecialchars($password);
     $login = trim($login);
     $password = trim($password);
-    $connect = mysql_connect ("localhost","root","");
-	mysql_select_db("pr",$connect);
-	mysql_set_charset("cp1251");
+    
     $result = mysql_query("SELECT login FROM users WHERE login='$login'",$connect);
     $myrow = mysql_fetch_array($result);
     if (!empty($myrow['login']))
 	{
-		echo "Извините, введённый вами логин уже зарегистрирован. Введите другой логин.";
+		echo "РР·РІРёРЅРёС‚Рµ, РІРІРµРґС‘РЅРЅС‹Р№ РІР°РјРё Р»РѕРіРёРЅ СѓР¶Рµ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ. Р’РІРµРґРёС‚Рµ РґСЂСѓРіРѕР№ Р»РѕРіРёРЅ.";
     }
     $result2 = mysql_query ("INSERT INTO users (login,password) VALUES('$login','$password')");
 	if ($result2=='TRUE')
 	{
-		echo "Вы успешно зарегистрированы! Теперь вы можете зайти на сайт. <a href='index.php'>Авторизироваться</a>";
+		echo "Р’С‹ СѓСЃРїРµС€РЅРѕ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅС‹! РўРµРїРµСЂСЊ РІС‹ РјРѕР¶РµС‚Рµ Р·Р°Р№С‚Рё РЅР° СЃР°Р№С‚. <a href='index.php'>РђРІС‚РѕСЂРёР·РёСЂРѕРІР°С‚СЊСЃСЏ</a>";
     }
 	else 
     {
-		echo "Ошибка! Вы не зарегистрированы.";
+		echo "РћС€РёР±РєР°! Р’С‹ РЅРµ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅС‹.";
     }
+	}
 ?>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
